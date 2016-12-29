@@ -1,0 +1,29 @@
+﻿@model UWA.Models.UnitedWay_KDMC2Pledges
+
+@{
+    ViewBag.Title = "Total";
+}
+
+<h3>Current Totals</h3>
+
+<b>Total Amount Donated:</b> $@ViewBag.data
+
+<br />
+<b>Total Donations:</b> Currently @ViewBag.TotalDonations donations greater or equal to $1.00 
+
+<br />
+<b>Fleece Jackets:</b> @ViewBag.fleeceGiven picked up out of @ViewBag.fleeceOrdered eligible 
+
+<br />
+<b>Long Sleeves:</b> @ViewBag.LSGiven picked up out of @ViewBag.LSOrdered eligible
+
+
+<br />
+<b>Short Sleeves:</b> @ViewBag.SSGiven picked up out of @ViewBag.SSOrdered eligible
+
+<br />
+<b>Notes:</b>
+<ul>
+<li>Rebecca Heaberlin donated $260 but wanted a Long Sleeve Shirt instead. Her reward is not reflected here</li>
+<li>Rebecca Yates donated 130 but wanted a 4X Short Sleeve Shirt instead. Her reward is still showing up as a long sleeve</li>
+</ul>

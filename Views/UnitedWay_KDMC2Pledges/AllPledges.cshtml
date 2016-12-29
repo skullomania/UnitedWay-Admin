@@ -1,0 +1,100 @@
+﻿@model PagedList.IPagedList<UWA.Models.UnitedWay_KDMC2Pledges>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "AllPledges";
+}
+
+<h3>Manage Pledges</h3>
+
+<p>
+    @Html.ActionLink("Create New Pledge", "Create")
+</p>
+
+<p>
+    @Html.ActionLink("Export To Excel", "ExportToExcel")
+</p>
+
+@using (Html.BeginForm("AllPledges", "UnitedWay_KDMC2Pledges", FormMethod.Get))
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().EmpID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Fname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Lname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().DateEntered)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().FirstTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().PrizeCriteria)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().PayType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().GrandTotal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().DonationYear)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateEntered)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrizeCriteria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PayType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GrandTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonationYear)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) 
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("AllPledges",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
